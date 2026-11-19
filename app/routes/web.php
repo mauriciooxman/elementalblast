@@ -3,7 +3,8 @@
 use App\Http\Controllers\StorefrontController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [StorefrontController::class, 'index'])->name('catalog');
+Route::get('/', [StorefrontController::class, 'home'])->name('home');
+Route::get('/catalogo', [StorefrontController::class, 'index'])->name('catalog');
 Route::get('/productos/{sku}', [StorefrontController::class, 'show'])->name('product');
 Route::get('/carro', [StorefrontController::class, 'cart'])->name('cart');
 Route::post('/carro/{sku}', [StorefrontController::class, 'add'])->name('cart.add');

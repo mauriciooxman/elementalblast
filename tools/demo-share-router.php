@@ -7,11 +7,12 @@ header('X-Content-Type-Options: nosniff');
 header('Referrer-Policy: no-referrer');
 header('X-Robots-Tag: noindex, nofollow');
 
-if (preg_match('#^/(?:css/store\.css|images/[a-zA-Z0-9_-]+\.svg|favicon\.ico)$#D', $path)) {
+if (preg_match('#^/(?:css/store\.css|js/catalog\.js|images/[a-zA-Z0-9_-]+\.svg|images/brand/(?:hero\.mp4|hero-poster\.jpg|elemental-blast-header\.png)|favicon\.ico)$#D', $path)) {
     $asset = realpath($publicRoot.$path);
     if ($asset && str_starts_with($asset, $publicRoot.DIRECTORY_SEPARATOR) && is_file($asset)) {
-        $types = ['css' => 'text/css; charset=utf-8', 'svg' => 'image/svg+xml', 'ico' => 'image/x-icon'];
+        $types = ['css' => 'text/css; charset=utf-8', 'js' => 'text/javascript; charset=utf-8', 'svg' => 'image/svg+xml', 'ico' => 'image/x-icon', 'mp4' => 'video/mp4', 'jpg' => 'image/jpeg', 'png' => 'image/png'];
         header('Content-Type: '.$types[pathinfo($asset, PATHINFO_EXTENSION)]);
+        header('Content-Length: '.filesize($asset));
         readfile($asset);
         return true;
     }
@@ -23,7 +24,7 @@ if ($path === '/robots.txt') {
     return true;
 }
 
-if (! preg_match('#^/(?:productos/[a-zA-Z0-9_-]+|carro(?:/[a-zA-Z0-9_-]+)?)?/?$#D', $path)) {
+if (! preg_match('#^/(?:catalogo|productos/[a-zA-Z0-9_-]+|carro(?:/[a-zA-Z0-9_-]+)?)?/?$#D', $path)) {
     http_response_code(404);
     header('Content-Type: text/plain; charset=utf-8');
     echo 'Página no disponible.';

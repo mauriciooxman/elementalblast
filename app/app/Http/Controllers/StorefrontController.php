@@ -21,6 +21,12 @@ class StorefrontController extends Controller
         return $store->products()->with('tiers')->publiclyVisible()->where('sku', $sku)->firstOrFail();
     }
 
+    public function home()
+    {
+        $store = $this->store();
+        return view('home', compact('store'));
+    }
+
     public function index(Request $request)
     {
         $store = $this->store();

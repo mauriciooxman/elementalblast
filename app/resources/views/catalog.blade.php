@@ -1,7 +1,7 @@
 @extends('layouts.store')
 @section('title', 'Catálogo')
 @section('content')
-<section class="intro"><p class="eyebrow">POR UNIDAD O POR CANTIDAD</p><h1>Encuentra tu próximo accesorio</h1><p>Elige lo que necesitas y descubre el precio para tu cantidad.</p></section>
+<section class="intro"><p class="eyebrow">CARTAS POKÉMON · SINGLES, SOBRES Y DISPLAYS</p><h1>Encuentra tu próxima carta</h1><p>Elige lo que necesitas y descubre el precio para tu cantidad.</p></section>
 <form class="filters panel" method="get" action="{{ route('catalog') }}" role="search"><div><label for="q">Buscar producto o modelo</label><input id="q" name="q" maxlength="100" value="{{ $filters['q'] ?? '' }}" placeholder="Ej. cable USB-C"></div><div><label for="category">Categoría</label><select id="category" name="category"><option value="">Todas las categorías</option>@foreach($categories as $category)<option value="{{ $category }}" @selected(($filters['category'] ?? '') === $category)>{{ $category }}</option>@endforeach</select></div><button>Buscar</button><a href="{{ route('catalog') }}">Limpiar filtros</a></form>
 <p class="muted">{{ $products->count() }} {{ $products->count() === 1 ? 'producto encontrado' : 'productos encontrados' }} · Precios en CLP</p>
 <div class="grid">
